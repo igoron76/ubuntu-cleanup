@@ -158,6 +158,22 @@ echo
 ip route
 
 echo
+echo "[Time] Configuring timezone and 24-hour time format..."
+
+timedatectl set-timezone Europe/Tallinn
+
+if command -v locale-gen >/dev/null 2>&1; then
+    locale-gen en_GB.UTF-8
+fi
+
+update-locale LC_TIME=en_GB.UTF-8
+
+echo
+echo "--- Time settings ---"
+timedatectl show -p Timezone --value
+LC_TIME=en_GB.UTF-8 date
+
+echo
 echo "=================================================="
 echo " Cleanup completed successfully."
 echo " Reboot is recommended."
